@@ -1,0 +1,41 @@
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-access" style="left:0">
+        <div class="sidebar-access-icon"></div>
+    </div>
+    <div id="sidebar-wrapper" style="left:-21%;">
+        <div class="hide-scroll">
+            <div class="viewport">
+                {{> sidebar }}
+            </div>
+        </div>
+    </div>
+    <div id="sub-sidebar-wrapper" class="hide">
+        {{> sub-sidebar }}
+    </div>
+
+    {{> navigation}}
+	<div id="stationPanelWrapper">
+    	{{> station-panel}}
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid tall">
+            {{> content }}
+        </div>
+    </div>
+	<div id="page-tile-wrapper" class="hide">
+		<div class="container-fluid tall"  >
+			{{> tile-view }}
+		</div>
+	</div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+
+<!-- Modal -->
+<div id="addStationContainerModal">
+    {{> modal-add-station }}
+</div>

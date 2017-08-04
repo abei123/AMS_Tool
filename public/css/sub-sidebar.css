@@ -1,0 +1,127 @@
+#sub-sidebar-wrapper {
+  background-color: #fff;
+  border-left: 1px solid #eee;
+}
+
+.filter-by {
+  padding: 25px;
+}
+
+.filter-by>div {
+  min-height: 50px;
+  margin-bottom: 10px;
+}
+
+.filter-by .filter-view-buttons>input {
+  float: left;
+  margin: 0;
+  width: 45%;
+  height: 35px;
+}
+
+.filter-by .filter-view-buttons>input.cancel-view {
+  margin-left: 10% !important;
+}
+
+.filter-by .filter-search {
+  margin-top: 30px;
+  height: 50px;
+}
+
+.filter-by .filter-search>.search-input {
+  font-size: 11pt;
+  color: #B3B3B3;
+  box-shadow: 0px 2px 0px #D0DAE0;
+  padding-left: 15px;
+  width: 100%;
+  height: 35px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background: url('../img/search.png');
+  background-position: 92% 50%;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+}
+
+.filter-by .filter-items{
+  margin-top: 20px;
+  max-height: 322px;
+  overflow-y: auto;
+}
+
+.filter-status {
+  font-size: 14pt;
+  color: black;
+  margin-top: 20px;
+
+}
+
+.filter-status input[type=checkbox] {
+  opacity: 0.8;
+  transform: scale(2);
+}
+
+.filter-status span {
+  width: 200px;
+}
+
+.filter-status :checked {
+  opacity: 1;
+  border: 2px solid #0083cb;
+}
+
+.filter-status :checked + span {
+  font-weight: bold;
+}
+
+.filter-status div.change-time {
+  width: 150px;
+  border-radius: 5px;
+  height: 42px;
+  margin-top: -46px;
+  margin-left: 100px;
+  border: 1px solid #ccc;
+}
+
+.filter-status :unchecked+div.change-time {
+  opacity: 1;
+  border: 1px solid;
+}
+.filter-status div.less-time {
+    margin-top: 11px;
+    margin-left: 10px;
+    width: 10%;
+}
+
+.filter-status div.more-time {
+    margin-top: -21px;
+    margin-left: 80%;
+    width: 10%;
+}
+
+.filter-status div.time-value {
+    width: 100px;
+    margin-left: 20%;
+    margin-top: -18px;
+    color: #777;
+    font-size: 11pt;
+}
+
+.filter-status input.time-value {
+	  width: 30px;
+    text-align: right;
+    outline: none;
+    font-size: 11pt;
+    border: none;
+}
+
+.c-checkbox {
+  margin-right: 30px;
+}
+
+.filter-status .c-checkbox span{
+  font-size: 11pt;
+  top: -33px;
+  word-wrap: break-word;
+}

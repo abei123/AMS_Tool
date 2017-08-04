@@ -1,0 +1,333 @@
+<!-- TEMPORARY INTERNAL STYLESHEET, TO BE MOVED/REMOVED ONCE CSS IS FINALIZED -->
+<style type="text/css" media="all">
+    table.table-fixedheader {
+        width: 100%;
+    }
+    
+    table.table-fixedheader,
+    table.table-fixedheader>thead,
+    table.table-fixedheader>tbody,
+    table.table-fixedheader>thead>tr,
+    table.table-fixedheader>tbody>tr,
+    table.table-fixedheader>thead>tr>th,
+    table.table-fixedheader>tbody>td {
+        display: block;
+    }
+    
+    .table>thead>tr>th{
+        border-bottom: none;
+    }
+    
+    table.table-fixedheader>thead>tr:after,
+    table.table-fixedheader>tbody>tr:after {
+        content: ' ';
+        display: block;
+        visibility: hidden;
+        clear: both;
+    }
+    
+    table.table-fixedheader>tbody {
+        overflow-y: scroll;
+        height: 100px;
+    }
+    
+    table.table-fixedheader>thead {
+        overflow-y: scroll;
+    }
+    
+    table.table-fixedheader>thead::-webkit-scrollbar {
+        background-color: inherit;
+    }
+    
+    table.table-fixedheader>thead>tr>th:after,
+    table.table-fixedheader>tbody>tr>td:after {
+        content: ' ';
+        display: table-cell;
+        visibility: hidden;
+        clear: both;
+    }
+    
+    table.table-fixedheader>thead tr th,
+    table.table-fixedheader>tbody tr td {
+        float: left;
+        word-wrap: break-word;
+    }
+    
+    .custom-row {
+        margin: 0px 5px 15px 5px;
+    }
+    
+    .custom-modal-dialog {
+        width: 800px;
+        max-width: 800px;
+    }
+    
+    .custom-modal-body {
+        background-color: #EBEFF2;
+    }
+    
+    .custom-modal-header {
+        background-color: #37495D !important;
+        color: white;
+        font-weight: bolder !important;
+        font-size: 21px !important;
+        padding-left: 30px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+    }
+    
+    .custom-modal-content {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+    
+    input[type="text"].custom-form-control {
+        font-size: 16px;
+        color: #B3B3B3;
+        box-shadow: 0px 2px 0px #D0DAE0;
+        padding-left: 25px;
+        width: 99%;
+        height: 60px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+    }
+    
+    .button-in-input {
+        margin-left: -145px;
+        margin-top: 10px;
+        width: 120px !important;
+    }
+    
+    .img-in-input {
+        margin-top: 9px;
+        margin-left: -57px;
+        height: 42px;
+        width: 42px;
+    }
+    
+    .modal-btn {
+        margin-right: 15px;
+    }
+    
+    .modal-btn-primary {
+        border: 1px solid #0082BC;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 5px 5px 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #0082BC;
+        height: 40px;
+        width: 175px;
+    }
+    
+    .modal-btn-secondary {
+        border: 1px solid #808080;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 5px 5px 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #808080;
+        height: 40px;
+        width: 175px;
+    }
+    
+    .modal-btn-disabled {
+        border: 1px solid #CCCCCC;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        font-size: 16px;
+        padding: 5px 5px 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        color: #FFFFFF;
+        background-color: #CCCCCC;
+        height: 40px;
+        width: 175px;
+    }
+    
+    .modal-btn-default {
+        border: 1px solid #0082BC;
+        font-size: 16px;
+        padding: 5px 5px 5px 5px;
+        text-decoration: none;
+        display: inline-block;
+        color: black;
+        background-color: #FFFFFF;
+        height: 60px;
+        width: 100%;
+    }
+    
+    .table thead {
+        background-color: #37495D;
+        color: white;
+        text-align: center;
+    }
+    
+    .table thead th {
+        font-weight: normal;
+        text-align: center;
+    }
+    
+    .table tbody tr {
+        font-weight: normal;
+        text-align: center;
+        color: #37495D;
+    }
+    
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #FFFFFF;
+    }
+    
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: #F1F5F4;
+    }
+    
+    .table tbody tr td {
+        border: none;
+    }
+    
+    .table ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .table ::-webkit-scrollbar-track-piece:start {
+        background: transparent url('img/blank.png') repeat-y !important;
+    }
+    
+    .table ::-webkit-scrollbar-track-piece:end {
+        background: transparent url('img/blank.png') repeat-y !important;
+    }
+    
+    .table ::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 3px;
+    }
+    
+    .tbl-border-dark {
+        padding: 1px;
+        border-right: 0.1em solid #CDCDCD;
+    }
+    
+    .tbl-border-light {
+        padding: 1px;
+        border-right: 0.1em solid white;
+    }
+    
+    .modal-control-label {
+        font-weight: bolder;
+    }
+    
+    #saveViewDivRow {
+        background-color: white;
+        padding: 15px 5px;
+    }
+
+</style>
+
+<!-- Modal -->
+<div class="modal" id="addDispatcherStationModal" tabindex="-1" role="dialog" aria-labelledby="addDispatcherStationModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-dialog" role="document">
+        <div class="modal-content custom-modal-content">
+            <div class="modal-header custom-modal-header">
+                <h4 class="modal-title" id="addDispatcherStationModalLabel">ADD DISPATCHER CODE OR STATION</h4>
+            </div>
+            <div class="modal-body custom-modal-body">
+                <div class="container col-md-12">
+                    <div class="row custom-row">
+                        <input id="dispatcherId" type="text" class="custom-form-control" placeholder="Input Dispatcher Code">
+                        <button id="dispatcherButton" class="modal-btn-primary button-in-input" type="button" onclick="getDispatcherStations()">Apply</button>
+                    </div>
+                    <div class="row custom-row" style="text-align: center">
+                        <hr style="width:45%; float:left; border-color: black;" /><span style="color: black; font-weight: bold;">OR</span>
+                        <hr style="width:45%; float:right; border-color: black;" />
+                    </div>
+                    <div class="row custom-row">
+                        <input type="text" id="stationFilter" class="custom-form-control" placeholder="Search IATA/Airport Name" onkeyup="filterStations()">
+                        <img class="img-in-input" alt="search" src="img/search.png" />
+                    </div>
+                    <div class="row custom-row">
+                        <table id="tblStation" class="table table-fixedheader table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" width="20%">
+                                        <div class="tbl-border-light">IATA</div>
+                                    </th>
+                                    <th width="60%">
+                                        <div class="tbl-border-light">Airport Name</div>
+                                    </th>
+                                    <th width="20%">Timezone</th>
+                                </tr>
+                            </thead>
+                            <tbody style="height:250px;">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; width: 100%;">Loading
+                                        <img src="img/loading.gif" width="18px" height="18px" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row custom-row">
+                        <div class="col-md-10 col-md-offset-2">
+                            <button type="button" id="mainButtonApply" class="modal-btn modal-btn-primary" data-dismiss="modal" onclick="updateStationTabs()">Apply</button>
+                            <button type="button" id="mainButtonCancel" class="modal-btn modal-btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="button" onclick="toggleSaveView();" class="modal-btn modal-btn-primary" style="margin-right: 0px;">Save View</button>
+                        </div>
+                    </div>
+                    <div class="row custom-row" id="saveViewDivRow" style="display: none;">
+                        <div class="col-md-12">
+                            <div class="row custom-row">
+                                <div class="col-md-5">
+                                    <label for="newView" class="modal-control-label">Save as New View</label>
+                                    <input type="text" class="custom-form-control" id="newView" placeholder="Enter view name">
+                                </div>
+                                <div class="col-md-1">
+                                    <span style="color: black; font-weight: bold; position:absolute; top:45%;">OR</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="existingView" class="modal-control-label">Associate to Existing View</label>
+
+                                    <div class="dropdown">
+                                        <button class="modal-btn-default dropdown-toggle" type="button" id="existingView" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Boeing 737 + 747
+                                    <span class="icon icon-dropdown_arrow_down_blue" style="margin-left: 120px;"></span>
+                                  </button>
+                                        <ul class="dropdown-menu" aria-labelledby="existingView" style="width:100%;">
+                                            <li role="separator" class="divider"></li>
+                                            <li>Boeing 737 + 747</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row custom-row">&nbsp;</div>
+                            <div class="row custom-row">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button type="button " class="modal-btn modal-btn-primary" style="margin-left: 40px;">Save</button>
+                                    <button type="button" onclick="toggleSaveView();" class="modal-btn modal-btn-secondary" style="margin-right: 0px;">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal-body -->
+            </div>
+        </div>
+    </div>
+</div>

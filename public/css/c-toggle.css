@@ -1,0 +1,90 @@
+.c-toggle {
+    position: relative;
+    width: 56px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.c-toggle input[type='checkbox'] {
+    display: none;
+}
+
+.c-toggle-label {
+    display: block;
+    cursor: pointer;
+    height: 30px;
+    padding: 0;
+    line-height: 28px;
+    text-indent: -30px;
+    border-radius: 15px;
+    background-color: #ccc;
+    transition: background-color 0.3s ease-in;
+}
+
+.c-toggle-label:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 26px;
+    border-radius: 22px;
+    transition: all 0.3s ease-in 0s;
+}
+
+.c-toggle-label span {
+    margin-right: 5px;
+}
+
+.c-toggle-label img {
+    width: 15px;
+    height: 15px;
+    margin-left: 12px;
+    margin-top: -3px;
+}
+
+.c-toggle-label div {
+    width: 15px;
+    height: 15px;
+}
+
+.c-toggle-label div::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 6px;
+    background: transparent;
+    top: 11px;
+    left: 10px;
+    border: 3px solid white;
+    border-top: none;
+    border-right: none;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform: translateZ(1px) rotate(-45deg);
+}
+
+.c-toggle input[type='checkbox']:checked+.c-toggle-label {
+    background-color: #0083cb;
+}
+
+.c-toggle input[type='checkbox']:checked+.c-toggle-label:before {
+    right: 0px;
+}
+
+.c-toggle input[type='checkbox']:checked+.c-toggle-label span {
+    color: #0083cb;
+}
+
+.c-toggle input[type='checkbox']:not(:checked)+.c-toggle-label span {
+    color: #aaa;
+}

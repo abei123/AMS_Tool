@@ -1,0 +1,15 @@
+node_modules/
+bower_components/
+build/
+bin/
+build/
+lib/
+deploy/
+karma/
+reports/
+documentation-dist/
+swagger-ui/docs/
+npm-debug.lo
+.settings/
+dest/
+*.bak

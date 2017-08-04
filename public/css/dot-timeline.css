@@ -1,0 +1,229 @@
+div.timeline-container {
+    height:  calc(100vh - 155px);
+    position: relative;
+}
+
+/* early arrival box */
+ 
+ .react-calendar-timeline .rct-item.item-good {
+     background: #307605;
+     border: transparent;
+ }
+ /* delayed box */
+ 
+ .react-calendar-timeline .rct-item.item-bad {
+     background: #CB1337;
+     border: transparent;
+ }
+ /* regular box */
+ 
+    .react-calendar-timeline .rct-item.item-normal {
+        background: #6C9EAD;
+        border: transparent;
+    }
+    /* irregular box */
+    
+    .react-calendar-timeline .rct-item.item-irregular {
+        background: #0084CA;
+        border: transparent;
+    }
+    /* vertical text */
+ 
+ .vertical-text {
+     width: 1px;
+     word-wrap: break-word;
+     font-family: monospace;
+     /* this is just for good looks */
+     font-size: 3px;
+     color: white;
+ }
+ /* splits box */
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane {
+     width: 100%;
+     height: 100%;
+     display: table;
+ }
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane-left {
+     float: left;
+     border: transparent;
+     border-right: 1px solid #ffffff;
+     text-orientation: upright;
+     writing-mode: vertical-lr;
+     font-size: 10px;
+     line-height: 20px;
+     text-align: center;
+     vertical-align: middle;
+     height: 40px;
+     width: 20px;
+     padding: 0px;
+ }
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane-left-details {
+     float: left;
+     width: 50px;
+     height: 100%;
+     border: transparent;
+     text-align: left;
+     font-size: 8px;
+     margin-top: 1.5em;
+ }
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane-center {
+     float: center;
+     width: calc(100% - 160px);
+     /* 160px is the sum of width defined in .item-split-pane-left(-details) and .item-split-pane-right(-details) */
+     height: 100%;
+ }
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane-right {
+     float: right;
+     border: transparent;
+     border-left: 1px solid #ffffff;
+     text-orientation: upright;
+     writing-mode: vertical-lr;
+     font-size: 10px;
+     line-height: 18px;
+     text-align: center;
+     vertical-align: middle;
+     height: 40px;
+     width: 20px;
+     padding: 0px;
+
+ }
+ 
+ .react-calendar-timeline .rct-items .rct-item .item-split-pane-right-details {
+     float: right;
+     width: 50px;
+     height: 100%;
+     border: transparent;
+     text-align: right;
+     font-size: 8px;
+     margin-top: 1.5em;
+ }
+ 
+ .react-calendar-timeline .rct-horizontal-lines .rct-hl-even,
+ .react-calendar-timeline .rct-horizontal-lines .rct-hl-odd {
+     /* adjusting border-bottom size does not work::: border-bottom: 2px solid white; */
+     border-bottom-style: solid;
+     border-bottom-color: white;
+     background-color: #EBEFF2 !important;
+ }
+ 
+ .react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-odd,
+ .react-calendar-timeline .rct-sidebar .rct-sidebar-row.rct-sidebar-row-even {
+     background-color: #DCE4E6 !important;
+     color: #37495D !important;
+     font-weight: bold !important;
+     /* adjusting border-bottom size will cause misalignment of rows */
+     border-bottom-style: solid;
+     border-bottom-color: white;
+     text-align: center;
+ }
+ 
+ .react-calendar-timeline .rct-header .rct-label-group {
+     border: none;
+ }
+ /* for date and day of week */
+ 
+ .rct-label-group {
+     background-color: #EBEFF2 !important;
+     color: #37495D !important;
+     border: none;
+ }
+ /* for time */
+ 
+ .rct-label {
+     color: #0083CB !important;
+ }
+ /* for date and day of week and time */
+.rct-header {
+    -webkit-box-shadow: 0px 3px 5px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 5px 2px rgba(0,0,0,.2);
+    background-color: #EBEFF2 !important;
+    z-index: 1;
+}
+
+ .react-calendar-timeline .rct-header .rct-label {
+     background-color: #EBEFF2 !important;
+     border: none;
+     border-bottom-width: 2px;
+     border-bottom-style: solid;
+     border-bottom-color: white;
+ }
+ /* for tails/gate label */
+ 
+ .react-calendar-timeline .rct-sidebar .rct-sidebar-header {
+      -webkit-box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,.2);
+     background-color: #DCE4E6 !important;
+     color: #37495D !important;
+     font-weight: bold !important;
+     border-bottom: 2px solid white;
+     text-align: center;
+ }
+ 
+ .rct-canvas {
+     background-color: #EBEFF2 !important;
+ }
+ 
+ .react-calendar-timeline .rct-today {
+     background: #404958;
+     z-index: 1;
+     width: 3px;
+ }
+
+
+
+
+
+.item-split-pane-left {
+    float: left;
+    color: white;
+
+}
+
+
+.item-split-pane-right {
+    float: right;
+    border-color: red;
+
+}
+
+.item-split-pane-right-details {
+    float: right;
+    width: 20px !important;
+        font-size: 6pt;
+}
+
+.rct-item-overflow {
+
+}
+
+.item-split-pane {
+    width: 100%;
+
+}
+
+div.item-split-pane-left-details {
+    float: left;
+    width: 20px !important;
+}
+
+
+
+.rct-item {
+    background-color: aqua;
+    width : 100%;
+}
+
+.item-split-pane-center {
+     width: calc(100% - 80px) !important;
+     float: left;
+}
+
+ 
+
+ 
+ 

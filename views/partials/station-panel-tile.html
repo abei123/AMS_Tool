@@ -1,0 +1,181 @@
+<div class="nav navbar stationPanel stationPanelTile">
+    <div class="nav navbar-left">
+    <div class="tileViewStationContainer">
+        <span class="icon icon-station-close tileViewStationClose"></span>
+        <div class="tileViewStationHeader">
+            <h4 id="staionPanelName">DFW</h4>
+            <label id="stationPanelTime">(GMT -5)</label>
+        </div>
+    </div>
+        <ul class="nav nav-tabs filterTabTile" id="dfwTabs">
+            <li role="presentation" class="active">
+                <a href="" data-toggle="tab" aria-expanded="false">ALL</a>
+            </li>
+            <li role="presentation">
+                <a href="" data-toggle="tab" aria-expanded="false">INBOUND</a>
+            </li>
+            <li role="presentation">
+                <a href="" data-toggle="tab" aria-expanded="false">OUTBOUND</a>
+            </li>
+        </ul>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <form class="form-group">
+            <label for="viewDate">SELECT DATE TO VIEW</label>
+            <div class="sDatePicker">
+                <input type="text" class="form-control sDatePickerInput" id="viewDate">
+            </div>
+        </form>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <div class="form-group">
+            <label for="carrier">CARRIER</label>
+            <button type="button" class="btn btn-default dropdown-toggle" id="carrier" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                AA+MQ<span class="icon icon-dropdown_arrow_down_blue" id="carrierIcon"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <div class="form-group">
+            <label for="timeScale">TIME SCALE</label>
+            <button type="button" class="btn btn-default dropdown-toggle" id="timeScale" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                3 hrs <span class="icon icon-dropdown_arrow_down_blue" id="timeScaleIcon"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <div class="form-group">
+            <label for="viewSelect">SELECTED VIEW</label>
+            <button type="button" class="btn btn-default dropdown-toggle" id="viewSelect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Boeing 737 + 747 <span class="icon icon-dropdown_arrow_down_blue" id="viewSelectIcon"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <div class="form-group">
+            <label>DELAYED ONLY</label>
+            <div class="c-toggle">
+                <input type="checkbox" name="c-toggle" id="delayedOnlyToggle">
+                <label class="c-toggle-label" for="delayedOnlyToggle">
+                    <div>&nbsp;</div>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="nav navbar-left filterPanel">
+        <div class="form-group">
+            <label for="delayType">DELAY TYPE</label>
+            <button type="button" class="btn btn-default dropdown-toggle" id="delayType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                All<span class="icon icon-dropdown_arrow_down_blue" id="delayTypeIcon"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="#">Posted Delay <br> > <b>15</b> mins</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Posted Delay <br> > <b>30</b> mins</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="nav navbar-right filterPanel filterRight">
+        <div class="form-group filterIconCol">
+            <span class="icon icon-mass_edit" id="massEditIcon"></span>
+            <span class="icon icon-notif_bell_default" id="notifBellIcon">
+                    <span class="icon alertNumBg icon-alert_circle_red icon-hidden" id="notifBellNum">100</span>
+            </span>
+            <span class="icon icon-alert_default" id="alertIcon">
+                    <span class="icon alertNumBg icon-alert_circle_red icon-hidden" id="alertNum"></span>
+            </span>
+            <span class="icon icon-drag" id="dragIcon"></span>
+        </div>
+    </div>
+</div>
+<div class="problemTypeContainer">
+    <div class="problemTypeBar">
+        <div class="col-sm-1 col-md-1">
+            <form class="form-horizontal">
+                <div class="form-group" id="problemToggle">
+                    <label class="col-sm-3 control-label pTLabel">ALL</label>
+                    <div class="col-sm-5 pTToggle">
+                        <div class="c-toggle">
+                            <input type="checkbox" name="c-toggle" id="allProblemsToggle">
+                            <label class="c-toggle-label" for="allProblemsToggle">
+                                <div>&nbsp;</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-11 col-md-11">
+            <div class="form-group">
+                <span class="icon icon-problemType_crewLegality_default" id="crewLegalityIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="crewLegalityAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_OOType_default" id="ooTypeIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="ooTypeAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_layover_default" id="layoverIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="layoverAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_taxiAlert_default" id="taxiAlertIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="taxiAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_intrntlMis_default" id="intrntlMisIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="intrntlMisAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_diversion_default" id="diversionIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="diversionAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_missingCrew_default" id="missingCrewIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="missingCrewAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_missingFA_default" id="missingFAIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="missingFAAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_failingCont_default" id="failingContIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="failingContAlerts"></span>
+                </span>
+                <span class="icon icon-problemType_missingTail_default" id="missingTailIcon">
+                <span class="icon problemNumBg icon-alert_circle_red icon-hidden" id="missingTailAlerts"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="notifAlerts-container">
+    <!--
+    <div class="notifBellAlerts notifBellAlertsWarning" id="notifAlert1">
+        <div class="col-sm-10 col-md-10 notifWarningCol">
+            <h4 class="notifWarningTitle"><strong>WARNING 1 Title</strong></h4>
+            <p class="notifWarningText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis est gravida nulla tincidunt aliquam.</p>
+        </div>
+        <div class="col-sm-2 col-md-2 notifTimeCol">
+            <p class="text-right notifTime">02:27</p>
+        </div>
+    </div>
+    <div class="notifBellAlerts" id="notifAlert2">
+        <div class="col-sm-10 col-md-10 notifWarningCol">
+            <h4 class="notifWarningTitle"><strong>WARNING 2 Title</strong></h4>
+            <p class="notifWarningText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sagittis est gravida nulla tincidunt aliquam.</p>
+        </div>
+        <div class="col-sm-2 col-md-2 notifTimeCol">
+            <p class="text-right notifTime">02:27</p>
+            <p class="text-right notifDate">04 Apr</p>
+        </div>
+    </div>
+  -->
+</div>

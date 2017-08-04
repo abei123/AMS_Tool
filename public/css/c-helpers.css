@@ -1,0 +1,60 @@
+.bold{
+  font-weight: bold;
+}
+
+.active{
+  color: #0083cb;
+}
+
+.inactive{
+  color: #777;
+}
+
+.bg-active{
+  background-color: #0083cb;
+}
+
+.color-custom-blue{
+  color: #0033fb;
+}
+
+.color-c{
+  color: #ccc;
+}
+
+.color-a{
+  color: #aaa;
+}
+
+.color-9{
+  color: #999;
+}
+
+.color-7{
+  color: #777;
+}
+
+.w-35{
+  width: 35%;
+}
+
+.w-50{
+  width: 50%;
+}
+
+.s-10{
+  font-size: 10pt;
+}
+
+.s-11{
+  font-size: 11pt;
+}
+
+.pad-top-2{
+  padding-top: 2px;
+}
+
+.hide{
+  display: none;
+  visibility: hidden;
+}

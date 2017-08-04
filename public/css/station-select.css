@@ -1,0 +1,24 @@
+.form-group .btn-group, .btn-group-vertical{
+  margin-top: 0;
+}
+
+.form-group .bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark {
+  margin-top: 13px;
+}
+
+.form-group .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){
+  width: 111px;
+}
+
+.form-group .dropdown-menu > li > a:hover{
+  color: #0083cb;
+}
+
+.form-group .bootstrap-select.btn-group .dropdown-toggle .caret{
+  background-image: url(../img/dropdown_arrow_down_blue.png);
+  background-size: 12px 12px;
+  width: 12px;
+  height: 12px;
+  top: 30%;
+  border: 0;
+}

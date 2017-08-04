@@ -1,0 +1,47 @@
+#wrapper {
+  min-width: 1600px;
+  min-height: 900px;
+}
+
+#sidebar-access {
+  display: block;
+  position: absolute;
+  float: left;
+  width: 30px;
+  height: 30px;
+  z-index: 997;
+}
+
+#sidebar-wrapper {
+  display: block;
+  position: absolute;
+  float: left;
+  width: 20%;
+  min-height: 900px;
+  z-index: 998;
+}
+
+#sub-sidebar-wrapper {
+  display: block;
+  float: left;
+  position: absolute;
+  width: 20%;
+  top: 163px;
+  left: 20%;
+  min-height: 600px;
+  box-shadow: 2px 0px 1px 0px #ccc;
+  z-index: 999;
+}
+
+#page-content-wrapper {
+  display: block;
+  float: left;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.shrink-page-content {
+  /*width: 79%;*/
+  left: 20%;
+}

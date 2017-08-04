@@ -1,0 +1,119 @@
+<!-- Modal Add Station Scripts -->
+<script>
+function filterStations() {
+    $('[id^=row-stn-]').each(function() {
+        var displayThis = false;
+
+        var stnFilters = $('#stationFilter').val().toUpperCase().split(',');
+
+        $(this).find('td').each(function(i, element) {
+            if ((i > 0) && (i < 3)) {
+                for (var j = 0; j < stnFilters.length; j++) {
+                    if ((j > 0) && (stnFilters[j].trim().length == 0)) continue;
+                    if ((element.innerHTML.toUpperCase().indexOf(stnFilters[j].trim()) > -1)) {
+                        displayThis = true;
+                        return false;
+                    }
+                }
+            }
+        });
+
+        if (displayThis) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+function getDispatcherStations() {
+    $('#dispatcherButton').html('Apply&nbsp;<img src="img/loading-blue.gif" width="18px" height="18px" />');
+
+    var socket = io.connect();
+    socket.emit('please provide dispatcher station data', {
+        dispatcherId: $('#dispatcherId').val()
+    });
+
+    socket.on('dispatcher station data', function(newData) {
+        console.log('Received updated dispatcher data');
+        if (newData) {
+            var stnList = '';
+            var curStn = '';
+            $('input:checkbox[id^=chk-]').prop('checked', false);
+            for (i = 0; i < newData.length; i++) {
+                $('input:checkbox[id=chk-' + newData[i] + ']').prop('checked', true);
+                curStn = $('#stn-id-' + newData[i] + ' > div').text().trim();
+                if (curStn.length > 0) {
+                    stnList += curStn + ', ';
+                }
+            }
+            if (stnList.endsWith(', ')) {
+                stnList = stnList.substr(0, stnList.length - 2);
+            }
+            $('#stationFilter').val(stnList);
+            filterStations();
+        }
+        $('#dispatcherButton').html('Apply');
+        
+        socket.close();
+    });
+}
+
+function updateStationTabs() {
+    $('#station-tab').html('');
+    $('input:checkbox[id^=chk-]:checked').each(function() {
+        $('#station-tab').append(
+            '<li id="station-tab-' + this.id.substr(4) + '">' +
+            '<div class="station-marker"></div>' +
+            '<div class="tab">' +
+            '<div class="icon-close"></div>' +
+            '<div class="station">' + this.id.substr(4) + '</div>' +
+            '<div class="timezone">(' +
+            $('#row-stn-' + this.id.substr(4) + ' td:nth-child(4)').html() +
+            ')</div>' +
+            '</div>' +
+            '</li>'
+        );
+    });
+    $('#station-tab li:first div:first').trigger('click');
+	
+	addStationInFilter();
+}
+    
+$(function() {
+    $('#addDispatcherStationModal').on('hidden.bs.modal', function() {
+        $('#dispatcherId').val('');
+        $('#stationFilter').val('');
+    });
+
+    $('#addDispatcherStationModal').on('shown.bs.modal', function() {
+        var socket = io.connect();
+        socket.emit('please update station data', {});
+        socket.on('updated station data', function(newData) {
+            console.log('Received updated data');
+            if (newData) {
+                $('#tblStation tbody').html('');
+                for (i = 0; i < newData.length; i++) {
+                    $('#tblStation tbody').append(
+                        '<tr id="row-stn-' + newData[i].ata_id + '">' +
+                        '<td width="7%"><div class="c-checkbox" style="height:20px;">' +
+                        '<input type="checkbox" name="options" id="chk-' + newData[i].ata_id + '">' +
+                        '<label for="chk-' + newData[i].ata_id + '"></div>' +
+                        '</td>' +
+                        '<td width="13% "><div class="tbl-border-dark ">' + newData[i].ata_id + '</div></td>' +
+                        '<td width="60% " style="text-align:left; " id="stn-id-' + newData[i].ata_id + '"><div class="tbl-border-dark ">' + newData[i].airportName + '</div></td>' +
+                        '<td width="20% ">' + newData[i].timeZone + '</td>' +
+                        '</tr>');
+                }
+
+                $('#station-tab li').each(function() {
+                    $('input:checkbox[id=chk-' + this.id.substr(12) + ']').prop('checked', true);
+                });
+
+            }
+                
+            socket.close();
+        });
+    });
+});
+</script>

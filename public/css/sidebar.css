@@ -1,0 +1,764 @@
+#sidebar-access{
+  margin: 20px 0 0 1%;
+  cursor: pointer;
+  position: fixed;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  z-index: 2000;
+}
+
+#sidebar-wrapper, #sub-sidebar-wrapper {
+    position: fixed;
+
+}
+
+.hide-scroll {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.viewport ::-webkit-scrollbar, .hide-scroll ::-webkit-scrollbar {
+    display: none;
+}
+
+
+.viewport  {
+    overflow: auto;
+    /* Make sure the inner div is not larger than the container
+     * so that we have room to scroll.
+     */
+    height: 100vh;
+
+}
+
+.sidebar-access-active{
+  background-color: #0082BC;
+}
+
+.sidebar-access-icon:before {
+  content:"";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  top: 10px;
+  left: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  -webkit-transform:translateZ(1px) rotate(-135deg);
+}
+
+.sidebar-access-icon:after {
+  content:"";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: transparent;
+  top: 10px;
+  left: 6px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+  -webkit-transform:translateZ(1px) rotate(-135deg);
+}
+
+.sidebar-access-active .sidebar-access-icon:after {
+  top: 10px;
+  left: 9px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform:translateZ(1px) rotate(45deg);
+}
+
+.sidebar-access-active .sidebar-access-icon:before {
+  top: 10px;
+  left: 13px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  -webkit-transform:translateZ(1px) rotate(45deg);
+}
+
+
+
+#sidebar-access:hover{
+  background-color: #0082BC;
+}
+
+#sidebar-wrapper{
+  background-color: #f5f5ff;
+  background: -webkit-linear-gradient(left, #f5f5ff, white); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #f5f5ff, white); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #f5f5ff, white); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #f5f5ff, white); /* Standard syntax */
+  box-shadow: 2px 2px 10px 0px #ccc;
+
+    height: 100vh;
+}
+
+#sidebar-wrapper #sw-top{
+  background-color: #fff;
+}
+
+#sidebar-wrapper #sw-top #logo{
+    text-align: center;
+    padding: 40px ;
+}
+
+#sidebar-wrapper #sw-top #logo img{
+  width: 50px;
+  height: 50px;
+}
+
+#sidebar-wrapper #sw-header{
+  display: block;
+  height: 35px;
+  background-color: #fff;
+}
+
+#sidebar-wrapper #sw-header > div{
+  float: left;
+  width: 50%;
+  padding-bottom: 10px;
+  text-align: center;
+  border-bottom: 3px solid #0083cb;
+  cursor: default;
+}
+
+#sidebar-wrapper #sw-header div span{
+  margin: auto;
+  color: #0083cb;
+}
+
+#sidebar-wrapper #sw-header div.header-inactive{
+  border-bottom: 3px solid #eee;
+}
+
+#sidebar-wrapper #sw-header div.header-inactive span{
+  color: #777;
+}
+
+#sidebar-wrapper #sw-header div:hover{
+  border-bottom: 3px solid #0083cb;
+}
+
+#sidebar-wrapper #sw-header div:hover span{
+  color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters{
+  width: 100%;
+}
+
+#sidebar-wrapper div.filter-toggle{
+  padding-top: 5%;
+  height: 120px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+}
+
+#sidebar-wrapper div.toggle-only{
+  height: 50px;
+  width: 100%;
+  border-bottom: none;
+}
+
+#sidebar-wrapper div.filter-toggle > div{
+  display: block;
+  float: left;
+  width: 50%;
+  height: 50px;
+  padding-left: 5%;
+}
+
+#sidebar-wrapper div.filter-toggle div > span{
+  display: block;
+  float: left;
+  padding-top: 5px;
+}
+
+#sidebar-wrapper div.toggle > *{
+  display: block;
+  float: left;
+  height: 50px;
+}
+
+#sidebar-wrapper div.filter-toggle div.toggle{
+  padding-left: 15%;
+}
+
+#sidebar-wrapper div.toggle > span{
+  width: 40%;
+}
+
+#sidebar-wrapper div.filter-toggle div.c-radio{
+  width: 100%;
+  height: 50px;
+}
+
+#sidebar-wrapper #sw-filters div.c-radio > div{
+  display: block;
+  float: left;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav {
+  border-top: 1px solid #fff;
+  max-height: 123px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav > div{
+  display: block;
+  float: left;
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active{
+  background: rgba(0, 131, 203, 0.02);
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-border{
+  width: 2%;
+  height: 118px;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav:hover{
+  background: rgba(0, 131, 203, 0.01);
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav:hover .fn-border{
+  background: rgba(0, 131, 203, 0.50);
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active:hover{
+  background: rgba(0, 131, 203, 0.02);
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active .fn-border{
+  background-color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active:hover .fn-border{
+  background-color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content{
+  width: 88%;
+  height: 115px;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content > div{
+  padding-top: 7%;
+  padding-left: 3%;
+  width: 100%;
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active span, #sidebar-wrapper #sw-filters div.filter-nav:hover span{
+  color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-list{
+  padding-top: 5%;
+  height: 100%;
+  overflow:auto;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-list:after{
+  content: " ";
+  clear: both;
+  display: block;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item{
+  padding-top: 0;
+  float: left;
+  width: 55px;
+  height: 25px;
+  border-radius: 8px;
+  padding-top: 3px;
+  padding-left: 8px;
+  margin-right: 3px;
+  background-color: #e3e3ff;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item > div{
+  float: left;
+  width: 25px;
+  height: 20px;
+  font-weight: bold;
+  color: #777;
+}
+
+.icon-close {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.icon-close:after {
+  background-color: #ccc;
+  width: 12px;
+  height: 4px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  position: absolute;
+  top:7px;
+  left: 4px;
+  content:"";
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform:translateZ(1px) rotate(-45deg);
+}
+
+.icon-close:before {
+  background-color: #ccc;
+  width: 4px;
+  height: 12px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  position: absolute;
+  top:3px;
+  left: 8px;
+  content:"";
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform:translateZ(1px) rotate(-45deg);
+}
+
+.icon-close:hover::after,.icon-close:hover::before {
+  background-color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item .icon-close{
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  position: relative;
+  top:0;
+  margin: 0 auto;
+  float: right;
+  margin-right: 5px;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item .icon-close:after,
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item .icon-close:before{
+  background-color: #fff;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item .icon-close:hover::after,
+#sidebar-wrapper #sw-filters div.filter-nav .fn-content .fn-content-item .icon-close:hover::before {
+  background-color: #0083cb;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-pointer{
+  width: 10%;
+  padding-top: 7%;
+  height: 107px;
+}
+
+#sidebar-wrapper #sw-filters div.filter-nav .fn-pointer .img-side-filter{
+  width: 15px;
+  height: 15px;
+  background: url("../img/side_filter_default.png") no-repeat;
+}
+
+#sidebar-wrapper #sw-filters div.nav-bg-active .fn-pointer .img-side-filter{
+  width: 15px;
+  height: 15px;
+  background: url("../img/side_filter_selected.png") no-repeat;
+}
+
+#sidebar-wrapper #sw-filters div.no-item-height{
+  height: 62px;
+  overflow: hidden;
+}
+
+
+.filter-view {
+  background: rgba(0, 131, 203, 0.02);
+  border: 1px solid #fff;
+  width: 86%;
+  height: 35%;
+  margin: 22px auto;
+  padding-left: 5%;
+}
+
+.filter-view > div{
+  float: left;
+  height: 29px;
+}
+
+
+
+#sidebar-wrapper .filter-view div.toggle-only{
+  height: 50px;
+  overflow: hidden;
+}
+
+#sidebar-wrapper .filter-view div.toggle-only > div{
+  padding-left: 0;
+}
+
+.filter-view > div.filter-view-label{
+  padding-top: 5%;
+  margin-bottom: 10px;
+}
+
+#sidebar-wrapper .filter-view div.toggle-only > div.toggle{
+  padding-left: 17%;
+}
+
+.styled-select {
+   background: url("../img/dropdown_arrow_down_blue.png") no-repeat 97% 30%;
+   height: 29px;
+   overflow: hidden;
+   border-radius: 5px;
+   border: 1px solid #ccc;
+   width: 90%;
+}
+
+.styled-select select {
+   background: transparent;
+   -webkit-appearance: none;
+   height: 29px;
+   padding: 5px;
+   width: 111%;
+   border:0;
+   outline:0;
+   color: #777;
+}
+
+.filter-view-buttons {
+  width: 100%;
+  padding-top: 5%;
+}
+
+.filter-view-buttons input{
+  width: 40%;
+  height: 29px;
+  margin-right: 10%;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.save-view{
+  border: 1px solid #0053cb;
+  background-color: #0053cb;
+  color: #fff;
+}
+
+.save-view:hover{
+  border: 1px solid #0053cb;
+  background-color: #0033fb;
+  color: #fff;
+}
+
+.cancel-view{
+  border: 1px solid #eee;
+  background-color: #eee;
+  color: #0053cb;
+}
+
+.cancel-view:hover{
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  color: #0013fb;
+}
+
+#sidebar-wrapper #sw-settings{
+  height: 55%;
+  width: 100%;
+
+}
+
+#sidebar-wrapper #sw-main-div{
+  height: 1000px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+#sidebar-wrapper div.time-turner{
+  padding-top: 5%;
+  height: 400px;
+  width: 100%;
+  border-bottom: 1px solid #eee;
+  color: #777;
+}
+
+#sidebar-wrapper div.time-turner *{
+  color: #777;
+}
+
+#sidebar-wrapper #turn-time{
+  height: 270px;
+}
+
+#sidebar-wrapper #delays{
+  height: 260px;
+}
+
+#sidebar-wrapper div.time-turner > div{
+  display: block;
+  float: left;
+  width: 100%;
+  height: 45px;
+  padding-left: 5%;
+}
+
+#sidebar-wrapper div.time-turner div.time-sub-label{
+  height: 35px;
+}
+
+#sidebar-wrapper div.time-turner div > span{
+  display: block;
+  float: left;
+  padding-top: 7px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time{
+  width: 100%;
+  height: 42px;
+  margin-bottom: 17px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time > div{
+  display: block;
+  float: left;
+  height: 30px;
+  padding-top: 12px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox{
+  width: 12%;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox input{
+  display: none;
+  visibility: hidden;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox label{
+    cursor: pointer;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background: #fefefe;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox label::after {
+  opacity: 0;
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 6px;
+  background: transparent;
+  top: 4px;
+  left: 2px;
+  border: 3px solid #0083cb;
+  border-top: none;
+  border-right: none;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform:translateZ(1px) rotate(-45deg);
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox label:hover::after {
+	border-color: #0083cb;
+  opacity: 0.8;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox label:hover {
+	border-color: #00a3cb;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-checkbox input[type=checkbox]:checked + label{
+	border: 2px solid #0083cb;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .delay-time-label{
+  width: 33%;
+  padding-top: 14px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .change-time{
+  width: 45%;
+  padding-top: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 42px;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .change-time > div{
+  width: 30%;
+  float: left;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .change-time .less-time{
+  padding-top: 12px;
+}
+
+.icon-minus {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top:0;
+  left:0;
+  margin: 0 auto;
+}
+
+.icon-minus:after {
+  background-color: #0083cb;
+  width: 11px;
+  height: 4px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  position: absolute;
+  top:7px;
+  left: 3.5px;
+  z-index:4;
+  content:"";
+}
+
+#sidebar-wrapper div.time-turner .delay-time .change-time .time{
+  width: 40%;
+  padding-top: 12px;
+  text-align: center;
+}
+
+#sidebar-wrapper div.time-turner .delay-time .change-time .more-time{
+  padding-top: 12px;
+}
+
+.icon-plus {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top:0;
+  left:0;
+  margin: 0 auto;
+}
+
+.icon-plus:after {
+  background-color: #0083cb;
+  width: 12px;
+  height: 4px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  position: absolute;
+  top:7px;
+  left: 4px;
+  content:"";
+}
+
+.icon-plus:before {
+  background-color: #0083cb;
+  width: 4px;
+  height: 12px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  position: absolute;
+  top:3px;
+  left: 8px;
+  content:"";
+}
+
+.filterStatus-button {
+  padding-top: 0;
+  float: left;
+  width: 75px;
+  height: 50px;
+  border-radius: 8px;
+  padding-top: 3px;
+  padding-left: 7px;
+  margin-right: 3px;
+  background-color: #e3e3ff;
+  text-align:center;
+}
+
+.fltLegStat-D_G_A {
+  padding-top: 0;
+  float: left;
+  width: 150px;
+  height: 50px;
+  border-radius: 8px;
+  padding-top: 3px;
+  padding-left: 7px;
+  margin-right: 3px;
+  background-color: #e3e3ff;
+  text-align:center;
+}
+.taxiOutReadOnly {
+	border: none;
+    text-align: center;
+    outline: none;
+	width: 50px;
+}
+
+#fltLegStat-button .icon-close{
+    width: 5px;
+    height: 15px;
+    cursor: pointer;
+    position: relative;
+    top: -40px;
+    left: 17px;
+    margin: 0 auto;
+}
+
+#fltLegStat-button #dvBtn-fltLegStat-D_G_A .icon-close{
+    width: 5px;
+    height: 15px;
+    cursor: pointer;
+    position: relative;
+    top: -40px;
+    left: 60px;
+    margin: 0 auto;
+}
+
+#fltLegStat-button .icon-close:after,
+#fltLegStat-button .icon-close:before{
+  background-color: #fff;
+}
+
+#fltLegStat-button .icon-close:hover::after,
+#fltLegStat-button .icon-close:hover::before {
+  background-color: #0083cb;
+}

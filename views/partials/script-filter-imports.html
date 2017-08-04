@@ -1,0 +1,518 @@
+<script>
+	$(".filter-nav").click(function(e) {
+		var senderElementName = e.target.tagName.toLowerCase();
+   		if (senderElementName === 'div') {
+			$(".filter-nav").not(this).each(function(){
+					$(this).removeClass("nav-bg-active");
+			});
+			$(this).addClass("nav-bg-active");
+			$("#sub-sidebar-wrapper").removeClass("hide");
+
+
+			if ($(this).attr('id') == "mainSBr-Filter-fltLegStat") {
+				$("#sideBarFilterStatus").removeClass("hide");
+				$("#sideBarFilterCheckBox").addClass("hide");
+
+				resetFilterStatusBar();
+				checkFilteredStatus();
+
+			} else if ($(this).attr('id').indexOf("mainSBr-") !== -1 && $(this).attr('id') !== "mainSBr-Filter-fltLegStat") {
+				$("#sideBarFilterCheckBox").removeClass("hide");
+				$("#sideBarFilterStatus").addClass("hide");
+
+				resetEquipFleetBar();
+			  	sidebarSettings( $(this).attr('id') );
+			}
+		}	else if (senderElementName === 'a') {
+
+	   		    var fltrType = e.target.id.split('-')[0];
+	   		    $("#searchFilterText").val(fltrType);
+
+				var divCloseBtnId = "#" + fltrType + "-button";
+				//$(divCloseBtnId).prop('disabled',true);
+
+	   		    var isFilterLegStat = (fltrType == "fltLegStat");
+	   		    var idSelector = function() { return this.id; };
+	   		    var arrSelected = [];
+
+	   		    if (isFilterLegStat) {
+					var checkBxKeyId = "input[id^=" + e.target.id + "]";
+					$(checkBxKeyId).prop('checked', false);
+
+		   		    setFilterStatusButton(e.target.id);
+
+					arrSelected = $("input[id^='fltLegStat-']:checked").map(idSelector).get();
+
+					if (e.target.id == "fltLegStat-prbType-TAXI_ALERT") {
+						$("#taxiOutMinutes").val('0');
+					} else {
+						if ($("#fltLegStat-prbType-TAXI_ALERT").prop('checked')) {
+							arrSelected.push("taxiOutMinutes-"+$("#taxiOutMinutes").val());
+						}
+					}
+
+	   		    } else {
+		   		      addFilteredButton(divCloseBtnId, e.target.id);
+
+		   		      var jqryId = "a[id^=" + fltrType + "]";
+		   		      arrSelected = $(jqryId).map(idSelector).get();
+
+		   		      arrSelected.forEach(function(part, index) {
+		   		      	if (e.target.id == arrSelected[index]) {
+						    arrSelected.splice(index , 1);
+						}
+					  });
+	   		    }
+
+			    var filterName = "Filter-" + fltrType;
+				var socket = io.connect();
+			    socket.emit('saving-filter-data', arrSelected, filterName);
+
+   		}
+
+	});
+
+  $("#save-filter").click(function() {
+        var chkBoxFilterId = "[id^=" + $("#searchFilterText").val() + "-]";
+        var filterName = "Filter-"+ $("#searchFilterText").val();
+  		var idSelector = function() { return this.id; };
+		var arrSelected = $(chkBoxFilterId).find(":checkbox:checked").map(idSelector).get();
+
+        var socket = io.connect();
+        socket.emit('saving-filter-data', arrSelected, filterName);
+
+        var millisecondsToWait = 1000;
+		setTimeout(function() {
+        	addFilteredButton("#" + $("#searchFilterText").val() + "-button");
+		}, millisecondsToWait);
+
+		closeSubsideBar();
+
+ });
+
+  $("#save-filter-status").click(function() {
+        var chkBoxFilterId = "[id^=fltLegStat-]";
+        var filterName = "Filter-fltLegStat";
+  		var idSelector = function() { return this.id; };
+		var arrSelected = $("input[id^='fltLegStat-']:checked").map(idSelector).get();
+
+
+        if (jQuery.inArray("fltLegStat-prbType-TAXI_ALERT",arrSelected)) {
+			arrSelected.push("taxiOutMinutes-"+$("#taxiOutMinutes").val());
+        }
+
+        var socket = io.connect();
+        socket.emit('saving-filter-data', arrSelected, filterName);
+
+        if (arrSelected.length > 0) {
+	        var millisecondsToWait = (arrSelected.length*100);
+			setTimeout(function() {
+        		setFilterStatusButton();
+			}, millisecondsToWait);
+        }
+
+		removeSubsideBrWrapper();
+
+ });
+
+ $("#save-filter-view").click(function() {
+
+  	var idSelector = function() { return this.id; };
+
+	var arrSelected = $("input[id^='radio-flighttype-']:checked").map(idSelector).get();
+	var flightType = ($("#flighttype").prop('checked'))?'ALL':$('#' + arrSelected).val();
+
+ 	arrSelected = $("input[id^='radio-fleet_body_type-']:checked").map(idSelector).get();
+ 	var fleetBodyType = ($("#fleetbodytype").prop('checked'))?'ALL':$('#' + arrSelected).val();
+
+	var appliedInStation = $("#filterview").prop('checked')?'ALL':$("#filteredStationList").val();
+
+	var filterPrototype = new FilterPrototype(flightType, fleetBodyType, appliedInStation);
+	var socket = io.connect();
+	socket.emit('saving-filter-data', filterPrototype, 'Filter-others');
+
+
+	loadGanttData();
+
+	alert("Saved Successfully!");
+	
+	var millisecondsToWait = 1000;
+	setTimeout(function() {
+			window.location.replace("http://localhost:3000/timeline");
+	}, millisecondsToWait);
+});
+
+function getOtherFilters() {
+	var socket = io.connect();
+    socket.emit('reading-filter-data',{}, 'Filter-others');
+    socket.on('retrieved-filter-data', function(newData) {
+          $(newData).each(function(){
+	          	if ((this.flightType != null) && this.flightType != 'ALL') {
+	          		$("#flighttype").prop('checked', false);
+	          		$("#radio-flighttype-reg").prop('checked', (this.flightType=="REGULAR"));
+	          		$("#radio-flighttype-prob").prop('checked', (this.flightType=="PROBLEMATIC"));
+	          	} else {
+	          		$("#flighttype").prop('checked', true);
+	          	}
+				$("#toggleFlighttype").click();
+
+
+	          	if ((this.fleetBodyType != null) && this.fleetBodyType != 'ALL') {
+	          		$("#fleetbodytype").prop('checked', false);
+	          		$("#radio-fleet_body_type-wide").prop('checked', (this.fleetBodyType=="WIDE"));
+	          		$("#radio-fleet_body_type-narrow").prop('checked', (this.fleetBodyType=="NARROW"));
+	          	} else {
+	          		$("#fleetbodytype").prop('checked', true);
+	          	}
+				$("#toggleFleetbodytype").click();
+
+	          	if ((this.appliedInStation != null) && this.appliedInStation != 'ALL') {
+	          		var initalVal = $("#filteredStationList").val();
+	          		$("#filterview").prop('checked', false);
+	          		$("#filteredStationList").val(this.appliedInStation);
+
+	          		if ($("#filteredStationList").val() == null) {
+	          			$("#filteredStationList").val(initalVal);
+	          		}
+	          	} else {
+	          		$("#filterview").prop('checked', true);
+	          	}
+          });
+
+    });
+}
+
+ $("#toggleFlighttype").click(function() {
+     $("input[id^='radio-flighttype-']").prop("disabled", $("#flighttype").prop('checked'));
+
+     if ($("#flighttype").prop('checked')) {
+     	$("input[id^='radio-flighttype-']").prop('checked', false);
+     } else {
+     	//$("#radio-flighttype-reg").prop('checked',true);
+     }
+ });
+
+ $("#toggleFleetbodytype").click(function() {
+      $("input[id^='radio-fleet_body_type-']").prop("disabled", $("#fleetbodytype").prop('checked'));
+     if ($("#fleetbodytype").prop('checked')) {
+     	$("input[id^='radio-fleet_body_type-']").prop('checked', false);
+     } else {
+     	$("#radio-fleet_body_type-wide").prop('checked',true);
+     }
+ });
+
+function sidebarSettings(filterIdValue) {
+      var showTblName = '[id^=' + filterIdValue.replace("mainSBr-","tbl")  +']';
+
+      $('[id^=tblFilter]').addClass("hide");
+      $(showTblName).removeClass("hide");
+
+	  checkFilteredBox(filterIdValue.replace("mainSBr-",""));
+}
+
+function setFilterStatusButton(unincludeItem) {
+
+    $('[id^=dvBtn-fltLegStat-]').addClass("hide");
+
+	var socket = io.connect();
+    socket.emit('reading-filter-data',{}, 'Filter-fltLegStat');
+    socket.on('retrieved-filter-data', function(newData) {
+ 		if (newData) {
+
+      $('#mainSBr-Filter-fltLegStat').removeClass("no-item-height");
+
+			if(newData.length === 0){
+				$('#mainSBr-Filter-fltLegStat').addClass("no-item-height");
+			}
+
+			 var isTaxi = false;
+			 for (i = 0; i < newData.length; i++) {
+				if (newData[i] != null) {
+				 	if ((newData[i].indexOf("taxiOutMinutes-") == -1) &&
+				 		((typeof unincludeItem == 'undefined') ||
+				 			((typeof unincludeItem != 'undefined') && (unincludeItem != newData[i]))
+				 		)) {
+
+				 		var divId = "#dvBtn-" + newData[i];
+						$(divId).removeClass("hide");
+
+						isTaxi = isTaxi?isTaxi:(newData[i] == "fltLegStat-prbType-TAXI_ALERT");
+				 	} else if (isTaxi && (newData[i].indexOf("taxiOutMinutes-") == 0)) {
+				 	   var taxiOutMin = newData[i].replace("taxiOutMinutes-", "")
+
+				 	   $('#taxiOutMinutesBtn').val(taxiOutMin);
+				 	}
+				}
+			 }
+ 		}
+	});
+}
+
+function addFilteredButton(filterIdValue, unincludeItem) {
+   var fieldFilterKey = filterIdValue.replace("#","").replace("-button","");
+   var filterName = "Filter-" + fieldFilterKey;
+
+	var socket = io.connect();
+    socket.emit('reading-filter-data',{}, filterName);
+    socket.on('retrieved-filter-data', function(newData) {
+ 		if (newData) {
+
+			if (newData.length > 0) {
+ 			     var idToRemoveClass = "#mainSBr-Filter-" + fieldFilterKey;
+	             $(idToRemoveClass).removeClass("no-item-height");
+			}
+
+ 		     $(filterIdValue).html('');
+
+			 for (i = 0; i < newData.length; i++) {
+			 	if ((typeof unincludeItem == 'undefined') ||
+			 		((typeof unincludeItem != 'undefined') && (unincludeItem != newData[i]))) {
+
+                    if (newData[i] != null) {
+				    	$(filterIdValue).append("<div class='fn-content-item' id='dvBtn-" + newData[i] + "'>" +
+											  "<div id='divLbl-" + newData[i] + "'>" + newData[i].replace(fieldFilterKey + "-","") + "</div>" +
+											  "<a class='icon-close' id='" + newData[i] + "'></a></div>");
+                    }
+
+			 	}
+			 }
+
+	    }
+
+    });
+}
+
+function changePlaceHolderSearchChkBx(filterTypeSelected) {
+     if (filterTypeSelected == "equip_type") {
+        return "Search Equipment Type";
+     } else if (filterTypeSelected == "equip_code") {
+        return "Search Equipment Code";
+     }  else if (filterTypeSelected == "fleet_type") {
+        return "Search Fleet Type";
+     }
+}
+
+function checkFilteredBox(filterName) {
+
+    var checkBxKey = filterName.replace("Filter-","");
+    var placeHldr = changePlaceHolderSearchChkBx(checkBxKey);
+
+    $("#searchFilterChkBx").attr('placeholder',placeHldr);
+    $("#searchFilterChkBx").val("");
+
+    $("#searchFilterText").val(checkBxKey);
+	var socket = io.connect();
+    socket.emit('reading-filter-data',{}, filterName);
+    socket.on('retrieved-filter-data', function(newData) {
+
+        for (i = 0; i < newData.length; i++) {
+           if (newData[i] != null) {
+			   var checkBxKeyId = "[id^=" + newData[i] + "]";
+			    $(checkBxKeyId).prop('checked', true);
+           }
+
+		}
+    });
+
+}
+
+function addStationInFilter() {
+	var jqryId = "#station-tab li";
+	var stationSelector = function() { return $(this).text(); };
+	var stationSelector = $(jqryId).find('.station').map(stationSelector).get();
+
+	$('#filteredStationList').html('');
+	for (i = 0; i < stationSelector.length; i++) {
+		$('#filteredStationList').append('<option>' + stationSelector[i] + '</option>');
+	}
+}
+
+function checkFilteredStatus() {
+	var socket = io.connect();
+    socket.emit('reading-filter-data',{}, 'Filter-fltLegStat');
+    socket.on('retrieved-filter-data', function(newData) {
+
+        for (i = 0; i < (newData.length); i++) {
+           if (newData[i] != null) {
+	            $("#taxiOutMinutes").val(0);
+				if (newData[i] != "taxiOutMinutes") {
+					var checkBxKeyId = "[id^=" + newData[i] + "]";
+					$(checkBxKeyId).prop('checked', true);
+				}
+
+				if (newData[i].indexOf("taxiOutMinutes-") != -1 && $('[id^=fltLegStat-prbType-TAXI_ALERT]').prop('checked')) {
+				    var txiOutMin = newData[i].replace("taxiOutMinutes-", "");
+					$("#taxiOutMinutes").val(txiOutMin);
+				}
+
+           }
+		}
+    });
+
+}
+
+function toggleSaveView() {
+    $('#saveViewDivRow').toggle();
+
+    var isDisabled = $('#mainButtonCancel').prop('disabled');
+    if (isDisabled) {
+        $('#mainButtonCancel').removeClass('modal-btn-disabled');
+        $('#mainButtonApply').removeClass('modal-btn-disabled');
+        $('#mainButtonCancel').addClass('modal-btn-secondary');
+        $('#mainButtonApply').addClass('modal-btn-primary');
+    } else {
+        $('#mainButtonCancel').removeClass('modal-btn-secondary');
+        $('#mainButtonApply').removeClass('modal-btn-primary');
+        $('#mainButtonCancel').addClass('modal-btn-disabled');
+        $('#mainButtonApply').addClass('modal-btn-disabled');
+    }
+    $('#mainButtonCancel').prop('disabled', (_, val) => !val);
+    $('#mainButtonApply').prop('disabled', (_, val) => !val);
+}
+
+<!-- Filter Side Bar START -->
+    function filterCheckBox() {
+
+        var tdFilterId = "[id^=" + $("#searchFilterText").val() + "-]";
+        var searchFilterId = "[id*=divChkBx-" + $("#searchFilterChkBx").val().toUpperCase()  + "]";
+
+        $(tdFilterId).find("div").hide();
+        $(tdFilterId).find(searchFilterId).show();
+    }
+
+
+    function applyAllChkBoxSettings(isCheck) {
+       var chkbxFilterId = "[id*=" + $("#searchFilterText").val() + "-]";
+
+	    $(chkbxFilterId).prop('checked', (isCheck==1));
+    }
+
+    function applyAllFilterStatus(isCheck) {
+       var chkbxFilterId = "[id*=fltLegStat-]";
+
+	    $(chkbxFilterId).prop('checked', (isCheck==1));
+	    $("#taxiOutMinutes").val('0');
+    }
+
+    function closeSubsideBar() {
+       //resetSubsideBar();
+       removeSubsideBrWrapper();
+    }
+
+    function removeSubsideBrWrapper() {
+       $("#sub-sidebar-wrapper").addClass("hide");
+    }
+
+    function resetSubsideBar() {
+        resetEquipFleetBar();
+        resetFilterStatusBar();
+    }
+
+	function resetFilterStatusBar() {
+		applyAllFilterStatus(0);
+		setFilterStatusButton();
+	}
+
+    function resetEquipFleetBar() {
+        $("#searchFilterChkBx").val("");
+        filterCheckBox();
+        applyAllChkBoxSettings(0);
+
+		addFilteredButton("#fleet_type-button");
+		addFilteredButton("#equip_type-button");
+		addFilteredButton("#equip_code-button");
+    }
+
+
+	var sort_by = function(field, reverse, primer){
+
+	   var key = primer ?
+	       function(x) {return primer(x[field])} :
+	       function(x) {return x[field]};
+
+	   reverse = !reverse ? 1 : -1;
+
+	   return function (a, b) {
+	       return a = key(a), b = key(b), reverse * ((a > b) - (b > a));
+	     }
+	}
+
+    function addSideBarCheckBxs(tblName, newData, valueKey) {
+
+     $(tblName).html('');
+
+     var filterCheckBoxes = "";
+     var arrData = [];
+     var colIndex = -1;
+
+     for (i = 0; i < newData.length; i++) {
+        var rawDataVal = newData[i][valueKey];
+        var filterValue = (rawDataVal==null? rawDataVal : rawDataVal.trim());
+        arrData[i] = filterValue;
+
+            if (filterValue != null && (i == arrData.indexOf(filterValue))) {
+                 colIndex++;
+	             var filterCheckBx = "<td id='" + valueKey + "-" + filterValue + "'>" +
+	                                  " <div class='c-checkbox' id='divChkBx-" + filterValue + "'>" +
+	                                    "<input type='checkbox' id='" + valueKey + "-" + filterValue + "'>" +
+	                                     "<label for='" + valueKey + "-" + filterValue +  "'></label>" +
+											"<span>" + filterValue + "</span></div></td>";
+	             filterCheckBoxes = filterCheckBoxes + filterCheckBx;
+
+	             if (colIndex % 2 != 0 || i == newData.length-1) {
+	                 $(tblName).append(
+    	            '<tr> ' + filterCheckBoxes + '</tr>');
+
+	                 filterCheckBoxes = "";
+	              }
+            }
+
+         }
+    }
+
+    function filterDataSort() {
+	    const ordered = {};
+	    Object.keys(unordered).sort().forEach(function(key) {
+		    ordered[key] = unordered[key];
+	    });
+       return ordered;
+    }
+
+<!-- Filter Side Bar END -->
+
+$(function() {
+        var socketFilter = io.connect();
+        socketFilter.emit('please update filter data', {});
+        socketFilter.on('updated equipment data', function(newData) {
+            console.log('Received updated data');
+
+            if (newData) {
+				newData.sort(sort_by('equip_code', false, function(a){return a.toUpperCase()}));
+
+
+                addSideBarCheckBxs('#tblFilter-equip_type', newData, 'equip_type');
+                addSideBarCheckBxs('#tblFilter-fleet_type tbody', newData, 'fleet_type');
+                addSideBarCheckBxs('#tblFilter-equip_code tbody', newData, 'equip_code');
+
+            }
+
+        });
+
+				$('.fn-content-list').each(function(i, obj) {
+					if(!$.trim( $(this).html() ).length){
+						$(this).parent().parent().addClass("no-item-height");
+					}else{
+						$(this).parent().parent().removeClass("no-item-height");
+					}
+				});
+
+				$('.fn-content-list').bind("DOMSubtreeModified",function(){
+				  if(!$.trim( $(this).html() ).length){
+						$(this).parent().parent().addClass("no-item-height");
+					}else{
+						$(this).parent().parent().removeClass("no-item-height");
+					}
+				});
+});
+
+</script>

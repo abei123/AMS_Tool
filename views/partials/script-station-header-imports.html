@@ -1,0 +1,246 @@
+<script>
+/*****STATION PANEL INIT*****/
+var $alertIconPos;
+var $alertLeft;
+var $stationPanelPos;
+var $notifBellPos;
+var $leftSlide = '0';
+$.fn.stationPanelInit = function() {
+    $alertIconPos = $('#alertIcon').offset();
+    $alertLeft = $alertIconPos.left - 1015;
+    $stationPanelPos = $('.stationPanel').offset();
+    $('.problemTypeContainer').css({
+        top: $stationPanelPos.top,
+        left: $alertLeft
+    });
+    /*$('.problemTypeBar').css({
+        left: '100%'
+    });*/
+    $notifBellPos = $('#notifBellIcon').offset();
+    $('.notifAlerts-container').css({
+        top: $notifBellPos.top + 40,
+        left: $notifBellPos.left - 300
+    });
+};
+$.fn.stationPanelInit();
+$.fn.stationPanelResize = function(){
+    if($(window).width() < 1700){
+    $('.filterTab').animate({
+        marginRight:($('.filterTab').css('margin-right') == '80px' ? '30px' : '80px')
+    },350);
+    $('.filterPanel').animate({
+        marginRight:($('.filterPanel').css('margin-right')=='20px' ? '3px' : '20px'),
+        marginLeft:($('.filterPanel').css('margin-left')=='20px' ? '3px' : '20px')
+    },350);
+ }else{
+    $('.filterTab').animate({
+        marginRight:($('.filterTab').css('margin-right') == '150px' ? '80px' : '150px')
+    },350);
+    $('.filterPanel').animate({
+        marginRight:($('.filterPanel').css('margin-right')=='30px' ? '10px' : '30px'),
+        marginLeft:($('.filterPanel').css('margin-left')=='30px' ? '10px' : '30px')
+    },350);
+
+ }
+ $('.filterIconCol > .icon').animate({
+        marginLeft:($('.filterIconCol > .icon').css('margin-left')=='15px' ? '2px' : '15px')
+    },350);
+};
+/******STATION PANEL INIT END********/
+$("#sw-header").children().click(function() {
+    var sibling = $(this).siblings().eq(0);
+    //show settings or filter
+    $("#sw-" + $(this).text().trim().toLowerCase()).removeClass("hide");
+    $("#sw-" + $(sibling).text().trim().toLowerCase()).addClass("hide");
+    //update header style -possibly optimized css to
+    $(this).removeClass("header-inactive");
+    $(sibling).addClass("header-inactive");
+
+	resetSubsideBar();
+});
+
+
+var spFlag = false;
+$("#sidebar-access").click(function() {
+    spFlag = !spFlag;
+
+    $("#sidebar-wrapper").animate({
+        left: ($("#sidebar-wrapper").css('left').indexOf('0px') == -1 ? '0%' : '-21%')
+    }, 350);
+
+    $("#sidebar-access").animate({
+        left: ($("#sidebar-access").css('left') == '0px' ? '19.8%' : '0%')
+    }, 350);
+
+    $("#sidebar-access").toggleClass('sidebar-access-active');
+
+    $(".navbar-default").animate({
+         marginLeft:($('.navbar-default').css('marginLeft') <= '0px' ? '19%' : '0%'),
+        width: (spFlag ? '81%' : '100%')
+    }, 350);
+    $('.stationPanel').animate({
+        marginLeft:($('.stationPanel').css('marginLeft') <= '0px' ? '19%' : '0%'),
+        width: (spFlag ? '81%' : '100%')
+     }, 350);
+    $("#page-content-wrapper").animate({
+        left: ($('#page-content-wrapper').css('left') == '0px' ? '20%' : '0%')
+    }, 350);
+    $(".ganttContainer").animate({
+        left: ($('.ganttContainer').css('left') == '0px' ? '20%' : '0%')
+    }, 350);
+    $.fn.stationPanelResize();
+
+    if ($("#sidebar-access").css('left') != '0px') {
+        	$("#sub-sidebar-wrapper").addClass("hide");
+    } else {
+			if ($("#filter-view").css("marginTop").replace('px', '') == 22) {
+				resetSubsideBar();
+			}
+
+	        addStationInFilter();
+	        getOtherFilters();
+    }
+});
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+$("#li-view-tab").click(function(e) {
+    e.preventDefault();
+    $("#li-view-tab").attr("class", "active");
+    $("#li-view-tile").attr("class", "");
+    $("#header-tab-wrapper").show();
+    $.fn.viewToggle();
+});
+$("#li-view-tile").click(function(e) {
+    e.preventDefault();
+    $("#li-view-tile").attr("class", "active");
+    $("#li-view-tab").attr("class", "");
+    $("#header-tab-wrapper").hide();
+    $.fn.viewToggle();
+});
+$("#li-view-table").click(function(e) {
+    e.preventDefault();
+    alert("Table view is not yet available.");
+});
+$("#station-tab").on("click", "li", function(e) {
+    e.preventDefault();
+    tmpStation = $(this).attr("id").replace("station-tab-", "");
+    //alert(tmpStation);
+    //remove active class on all tabs, set only on the clicked element
+    $("#station-tab li").attr("class", "");
+    $(this).attr("class", "active");
+});
+
+$("#station-tab").on("click", "div", function (e) {
+         e.preventDefault();
+         //tmpStation = $(this).attr("id").replace("station-tab-", "");
+     if (!($(this).hasClass('icon-close') || $(this).hasClass('tab'))) {
+         var tmpStation = getStationNameFromStationTabID( $(this).closest('li').attr("id") );
+         activateStation(tmpStation);
+     }
+
+	 //TODO: insert code to toggle stations view
+ });
+
+ $("#station-tab").on("click", "div.icon-close", function (e) {
+         e.preventDefault();
+     var tmpLi = $(this).parent().parent();
+
+     var toActivate = null;
+     if($(tmpLi).next('li').length){
+       toActivate = $(tmpLi).next('li');
+     } else {
+       if($(tmpLi).prev('li').length){
+         toActivate = $(tmpLi).prev('li');
+       }
+     }
+
+     var tmpClass = $(tmpLi).attr("class");
+     //activate preceding station if station to be closed is active
+     if(toActivate != null && tmpClass.indexOf("active")>=0){
+        activateStation(getStationNameFromStationTabID( $(toActivate).attr("id") ) );
+     }
+
+     tmpLi.remove();
+
+     //TODO: insert code to remove the stations view
+ });
+
+ function getStationNameFromStationTabID(id){
+   return id.replace("station-tab-", "");
+ }
+
+ function activateStation(station){
+   //remove active class on all tabs, set only on the clicked element
+   $("#station-tab li").attr("class", "");
+   $("#station-tab-"+station).attr("class", "active");
+
+   //TODO: insert code to activate station view
+ }
+
+/************STATION PANEL - TO BE CLEANED****************/
+$('.notifTimeCol').each(function() {
+    var $this = $(this);
+    $this.css('margin-top', ($this.parent().height() - $this.height()) / 2);
+});
+$('.filterTab').each(function() {
+    var $this = $(this);
+    $this.css('margin-top', $this.parent().height() - $this.height());
+});
+$('#problemToggle').each(function() {
+    var $this = $(this);
+    $this.css('margin-top', $this.parent().height() - $this.height());
+});
+if ($('#timeScale').is(':disabled')) {
+    $('#timeScaleIcon').attr('class', 'icon icon-dropdown_arrow_down_grey');
+}
+if ($('#carrier').is(':disabled')) {
+    $('#carrierIcon').attr('class', 'icon icon-dropdown_arrow_down_grey');
+}
+if ($('#viewSelect').is(':disabled')) {
+    $('#timeScaleIcon').attr('class', 'icon icon-dropdown_arrow_down_grey');
+}
+if ($('#delayType').is(':disabled')) {
+    $('#delayTypeIcon').attr('class', 'icon icon-dropdown_arrow_down_grey');
+}
+/*Problem Type Bar Show*/
+$('.problemTypeContainer').hide();
+$('#alertIcon').click(function() {
+    if ($('#alertIcon').attr("class") == "icon icon-alert_default") {
+        $.fn.stationPanelInit();
+        $('#alertIcon').attr('class', 'icon icon-alert_selected');
+        /*$('.problemTypeBar').animate({
+            width: 'toggle',
+            left: $alertLeft
+        }, 350);*/
+    } else {
+        $('#alertIcon').attr('class', 'icon icon-alert_default');
+        /*$('.problemTypeBar').animate({
+            width: 'toggle',
+            left: $alertIconPos.left
+        }, 350);*/
+    }
+     $('.problemTypeContainer').animate({
+        visibility:'toggle'
+    }, 350);
+    $('.problemTypeBar').animate({
+        left: ($('.problemTypeBar').css('left') == '0px' ? '100%' : '0%')
+    }, 350);
+});
+/*Notifications*/
+$('.notifAlerts-container').hide();
+$('#notifBellIcon').click(function() {
+    if ($('#notifBellIcon').attr("class") == "icon icon-notif_bell_default") {
+        $.fn.stationPanelInit();
+        $('#notifBellIcon').attr('class', 'icon icon-notif_bell_selected');
+    } else {
+        $('#notifBellIcon').attr('class', 'icon icon-notif_bell_default');
+    }
+    $('.notifAlerts-container').animate({
+        height: 'toggle'
+    }, 350);
+});
+</script>
+<script src="js/station-panel.js"></script>
+<script src="js/station-notif.js"></script>

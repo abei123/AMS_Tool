@@ -1,0 +1,87 @@
+<div id="sideBarFilterCheckBox" class="filter-by">
+  <div id="filter-view-settings-buttons" class="filter-view-buttons">
+  <input type="button" value="Select All" id="select-all-chkBx" class="save-view" onclick="applyAllChkBoxSettings(1)" />
+  <input type="button" value="Clear All" id="clear-all-chkBx" class="cancel-view" onclick="applyAllChkBoxSettings(0)" /></div>
+
+  <div class="filter-search">
+      <input type="hidden" id="searchFilterText" />
+      <input type="text" id="searchFilterChkBx" class="search-input" placeholder="" onkeyup="filterCheckBox()">
+  </div>
+
+  <div class="filter-items">
+     <table id="tblFilter-equip_type">
+       <tr></tr>
+     </table>
+     <table id="tblFilter-fleet_type">
+       <tr></tr>
+     </table>
+     <table id="tblFilter-equip_code">
+       <tr></tr>
+     </table>
+  </div>
+
+      <div id="filter-view-settings-buttons" class="filter-view-buttons">
+  <input type="button" value="Save" id="save-filter" class="save-view" />
+  <input type="button" value="Cancel" id="cancel-filter" class="cancel-view" onclick="closeSubsideBar()"/></div>
+
+</div>
+
+<div id="sideBarFilterStatus" class="filter-by hide">
+  <div id="filter-view-settings-buttons" class="filter-view-buttons">
+  <input type="button" value="Select All" id="select-all-chkBx" class="save-view" onclick="applyAllFilterStatus(1)" />
+  <input type="button" value="Clear All" id="clear-all-chkBx" class="cancel-view" onclick="applyAllFilterStatus(0)" /></div>
+
+  <div class="filter-items">
+         	<div class='filter-status'>
+               <div class="c-checkbox">
+                 <input type='checkbox' id='fltLegStat-prbType-DECISION'>
+                 <label for='fltLegStat-prbType-DECISION'></label>
+                 <span>Decision Flights</span>
+               </div>
+         	</div>
+            <div class='filter-status'>
+              <div class="c-checkbox">
+                 <input type='checkbox' id='fltLegStat-X'>
+                 <label for='fltLegStat-X'></label>
+                 <span>Cancelled Flights</span>
+               </div>
+         	</div>
+         	<div class='filter-status'>
+            <div class="c-checkbox">
+                 <input type='checkbox' id='fltLegStat-prbType-OUT_OF_TYPE'>
+                 <label for='fltLegStat-prbType-OUT_OF_TYPE'></label>
+                 <span>Out of Type</span>
+               </div>
+         	</div>
+         	<div class='filter-status'>
+            <div class="c-checkbox">
+                 <input type='checkbox' id='fltLegStat-prbType-TAXI_ALERT'>
+                 <label for='fltLegStat-prbType-TAXI_ALERT'></label>
+                 <span>Taxi Out ></span>
+               </div>
+	         	   <div class="change-time">
+							<div class="less-time">
+								<div class="icon-minus" onclick="$(taxiOutMinutes).val($(taxiOutMinutes).val()-1);"></div>
+							</div>
+							<div class="time-value">
+								<input class="time-value" id="taxiOutMinutes" type="text" value="0" onchange="$(this).val(isNaN($(this).val())?0:$(this).val());"> min
+							</div>
+							<div class="more-time">
+								<div class="icon-plus" onclick="$(taxiOutMinutes).val(parseInt($(taxiOutMinutes).val(),10)+1);"></div>
+							</div>
+	         	   </div>
+			</div>
+         	<div class='filter-status'>
+            <div class="c-checkbox">
+                 <input type='checkbox' id='fltLegStat-D_G_A'>
+                 <label for='fltLegStat-D_G_A'></label>
+                 <span>Inbound Resource Diversion / Interrupts</span>
+               </div>
+         	</div>
+  </div>
+
+  <div id="filter-view-settings-buttons" class="filter-view-buttons">
+  <input type="button" value="Save" id="save-filter-status" class="save-view" />
+  <input type="button" value="Cancel" id="cancel-filter" class="cancel-view" onclick="removeSubsideBrWrapper()"/></div>
+
+</div>

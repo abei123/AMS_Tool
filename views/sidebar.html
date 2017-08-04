@@ -1,0 +1,238 @@
+		<div id="sw-top">
+				<div id="logo"><img src="img/logo.png" /></div>
+		</div>
+		<div id="sw-header">
+				<div>
+						<span class="bold">FILTERS</span>
+				</div>
+				<div class="header-inactive">
+						<span class="bold">SETTINGS</span>
+				</div>
+		</div>
+	<div id="sw-main-div">
+		<div id="sw-filters" class="">
+				<div id="flight-type" class="filter-toggle">
+						<div><span class="s-11 bold color-7">Flight Type</span></div>
+						<div class="toggle">
+								<div class="c-toggle" id="toggleFlighttype">
+										<input type="checkbox" name="c-toggle" id="flighttype" checked>
+										<label class="c-toggle-label" for="flighttype">
+											<span class="s-10">ALL</span>
+											<!--<img src="img/check.png" />-->
+											<div>&nbsp;</div>
+										</label>
+								</div>
+						</div>
+						<div class="c-radio" >
+								<div class="w-35">
+										<input type="radio" name="radio-flighttype" id="radio-flighttype-reg" value="REGULAR" disabled />
+										<label for="radio-flighttype-reg" class="s-10">REGULAR</label>
+								</div>
+								<div class="w-50">
+										<input type="radio" name="radio-flighttype" id="radio-flighttype-prob" value="PROBLEMATIC" disabled/>
+										<label for="radio-flighttype-prob" class="s-10">PROBLEMATIC</label>
+								</div>
+						</div>
+				</div>
+				<div id="fleet-body-type" class="filter-toggle">
+						<div><span class="s-11 bold color-7">Fleet Body Type</span></div>
+						<div class="toggle">
+								<div class="c-toggle" id="toggleFleetbodytype">
+										<input type="checkbox" name="c-toggle" id="fleetbodytype" checked>
+										<label class="c-toggle-label" for="fleetbodytype">
+											<span class="s-10">ALL</span>
+											<!--<img src="img/check.png" />-->
+											<div>&nbsp;</div>
+										</label>
+								</div>
+						</div>
+						<div class="c-radio">
+								<div class="w-35">
+										<input type="radio" name="radio-fleetbodytype" id="radio-fleet_body_type-wide" value="WIDE" disabled />
+										<label for="radio-fleet_body_type-wide" class="s-10">WIDE</label>
+								</div>
+								<div class="w-50">
+										<input type="radio" name="radio-fleetbodytype" id="radio-fleet_body_type-narrow" value="NARROW" disabled />
+										<label for="radio-fleet_body_type-narrow" class="s-10">NARROW</label>
+								</div>
+						</div>
+				</div>
+				<div id="mainSBr-Filter-fleet_type" class="filter-nav" data-target="#sideBarFilterCheckBox">
+						<div class="fn-border"></div>
+						<div class="fn-content">
+								<div><span class="s-11 bold color-7">Fleet Type</span></div>
+								<div id="fleet_type-button" class="fn-content-list">
+								</div>
+						</div>
+						<div class="fn-pointer" data-target="#sideBarFilterCheckBox">
+								<div class="img-side-filter"></div>
+						</div>
+				</div>
+				<div id="mainSBr-Filter-equip_type" class="filter-nav" data-target="#sideBarFilterCheckBox">
+						<div class="fn-border"></div>
+						<div class="fn-content">
+								<div><span class="s-11 bold color-7">Equipment Type</span></div>
+								<div id="equip_type-button" class="fn-content-list">
+								</div>
+						</div>
+						<div class="fn-pointer" data-target="#sideBarFilterCheckBox">
+								<div class="img-side-filter"></div>
+						</div>
+				</div>
+				<div id="mainSBr-Filter-equip_code" class="filter-nav" data-target="#sideBarFilterCheckBox">
+						<div class="fn-border"></div>
+						<div class="fn-content">
+								<div><span class="s-11 bold color-7">Equipment Code</span></div>
+								<div id="equip_code-button" class="fn-content-list">
+								</div>
+						</div>
+						<div class="fn-pointer" data-target="#sideBarFilterCheckBox">
+								<div class="img-side-filter"></div>
+						</div>
+				</div>
+				<div id="mainSBr-Filter-fltLegStat" class="filter-nav" data-target="#sideBarFilterStatus">
+						<div class="fn-border"></div>
+						<div class="fn-content">
+								<div><span class="s-11 bold color-7">Flight Status</span></div>
+								<div id="fltLegStat-button"  class="fn-content-list">
+									<div class='filterStatus-button hide' id='dvBtn-fltLegStat-prbType-DECISION' >
+										<div id='divLbl-fltLegStat-prbType-DECISION'>Decision<br/>Flights</div>
+										<a class='icon-close' id='fltLegStat-prbType-DECISION'></a>
+									</div>
+									<div class='filterStatus-button hide' id='dvBtn-fltLegStat-X' >
+										<div id='divLbl-fltLegStat-X'>Cancelled<br/>Flights</div>
+										<a class='icon-close' id='fltLegStat-X'></a>
+									</div>
+									<div class='filterStatus-button hide' id='dvBtn-fltLegStat-prbType-OUT_OF_TYPE' >
+										<div id='divLbl-fltLegStat-prbType-OUT_OF_TYPE'>Out of Type</div>
+										<a class='icon-close' id='fltLegStat-prbType-OUT_OF_TYPE'></a>
+									</div>
+									<div class='filterStatus-button hide' id='dvBtn-fltLegStat-prbType-TAXI_ALERT' >
+										<div id='divLbl-fltLegStat-prbType-TAXI_ALERT'>Taxi Out <br/>> <input type='text' class='taxiOutReadOnly' id='taxiOutMinutesBtn' readonly="readonly"> </div>
+										<a class='icon-close' id='fltLegStat-prbType-TAXI_ALERT'></a>
+									</div>
+									<br/>
+									<div class='fltLegStat-D_G_A hide' id='dvBtn-fltLegStat-D_G_A' >
+										<div id='divLbl-fltLegStat-D_G_A'>Inbound Resource<br/>Diversion/Interrupts</div>
+										<a class='icon-close' id='fltLegStat-D_G_A'></a>
+									</div>
+
+								</div>
+						</div>
+						<div class="fn-pointer" data-target="#sideBarFilterStatus">
+								<div class="img-side-filter"></div>
+						</div>
+				</div>
+		</div>
+		<div id="sw-settings" class="hide">
+				<div id="turn-time" class="time-turner">
+						<div><span class="s-11 bold color-7">Turn Time</span></div>
+						<div class="time-sub-label"><span class="bold color-custom-blue s-10">DOMESTIC</span></div>
+						<div class="delay-time">
+								<div class="delay-time-checkbox">
+										<input type="checkbox" name="domestic-delay" id="domesticdelay" checked/>
+										<label for="domesticdelay"></label>
+								</div>
+								<div class="delay-time-label">Posted Delay ></div>
+								<div class="change-time">
+										<div class="less-time">
+												<div class="icon-minus"></div>
+										</div>
+										<div class="time">20 min</div>
+										<div class="more-time">
+												<div class="icon-plus"></div>
+										</div>
+								</div>
+						</div>
+						<div class="time-sub-label"><span class="bold color-custom-blue s-10">INTERNATIONAL</span></div>
+						<div class="delay-time">
+								<div class="delay-time-checkbox">
+										<input type="checkbox" name="domestic-delay" id="internationaldelay" />
+										<label for="internationaldelay"></label>
+								</div>
+								<div class="delay-time-label">Posted Delay ></div>
+								<div class="change-time">
+										<div class="less-time">
+												<div class="icon-minus"></div>
+										</div>
+										<div class="time">45 min</div>
+										<div class="more-time">
+												<div class="icon-plus"></div>
+										</div>
+								</div>
+						</div>
+				</div>
+				<div id="delays" class="time-turner">
+						<div><span class="s-11 bold color-7">Delays</span></div>
+						<div class="delay-time">
+								<div class="delay-time-checkbox">
+										<input type="checkbox" name="domestic-delay" id="posteddelay0" />
+										<label for="posteddelay0"></label>
+								</div>
+								<div class="delay-time-label">Posted Delay ></div>
+								<div class="change-time">
+										<div class="less-time">
+												<div class="icon-minus"></div>
+										</div>
+										<div class="time">15 min</div>
+										<div class="more-time">
+												<div class="icon-plus"></div>
+										</div>
+								</div>
+						</div>
+						<div class="delay-time">
+								<div class="delay-time-checkbox">
+										<input type="checkbox" name="domestic-delay" id="posteddelay1" checked/>
+										<label for="posteddelay1"></label>
+								</div>
+								<div class="delay-time-label">Posted Delay ></div>
+								<div class="change-time">
+										<div class="less-time">
+												<div class="icon-minus"></div>
+										</div>
+										<div class="time">45 min</div>
+										<div class="more-time">
+												<div class="icon-plus"></div>
+										</div>
+								</div>
+						</div>
+						<div class="delay-time">
+								<div class="delay-time-checkbox">
+										<input type="checkbox" name="domestic-delay" id="edcdelay" />
+										<label for="edcdelay"></label>
+								</div>
+								<div class="delay-time-label">EDC slot &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; > time delay</div>
+								<div class="change-time">
+										<div class="less-time">
+												<div class="icon-minus"></div>
+										</div>
+										<div class="time">45 min</div>
+										<div class="more-time">
+												<div class="icon-plus"></div>
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+		<div id="filter-view" class="filter-view">
+							<div class="filter-toggle toggle-only">
+									<div class=""><span class="bold color-7 s-9">APPLY FILTERS TO</span></div>
+									<div class="toggle">
+											<div class="c-toggle">
+													<input type="checkbox" name="c-toggle" id="filterview" checked>
+													<label class="c-toggle-label" for="filterview">
+													<span class="s-9">ALL</span>
+													<!--<img src="img/check.png" />-->
+													<div>&nbsp;</div>
+												</label>
+											</div>
+									</div>
+							</div>
+							<div class="styled-select"><select class="styled-select" id="filteredStationList"></select></div>
+							<div class="filter-view-label"><span class="bold color-7 s-9">SAVE VIEW AS</span></div>
+							<div class="styled-select"><select class="styled-select"><option>Update to existing</option><option>...</option></select></div>
+							<div class="filter-view-label"><span class="bold color-7 s-9">SELECT VIEW TO UPDATE</span></div>
+							<div class="styled-select"><select class="styled-select"><option>Boeing 737 + 747</option><option>...</option></select></div>
+							<div id="filter-view-buttons" class="filter-view-buttons"><input type="button" value="Save" id="save-filter-view" class="save-view" /><input type="button" value="Cancel" id="cancel-view" class="cancel-view" /></div>
+		</div>
+	</div>
