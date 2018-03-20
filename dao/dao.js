@@ -45,8 +45,12 @@ module.exports = {
     readDataFilter: function readDataFilter(fileName, callback) {
     	fs.readFile('work_files/'+fileName, function (err, data) {
     	    if(err == null) {
-    	        console.log('File exists');
-    	        callback(JSON.parse(data));
+                console.log('File exists');
+                try {
+                    callback(JSON.parse(data));
+                } catch (error) {
+                    console.log(error);
+                }
     	    } else if(err.code == 'ENOENT') {
     	    	console.log('No ' + fileName + ' created yet.');
     	    } else {
